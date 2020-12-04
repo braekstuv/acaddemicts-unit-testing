@@ -6,24 +6,24 @@ using Xunit;
 
 namespace RestaurantApp.Test
 {
-    public class UnitTest1
+    public class RestaurantTests
     {
         [Fact]
         public void GettingTableNumberWithHighestPrice_ReturnsExpectedResult()
         {
             //Arrange
-            var orders = new List<Order>()
+            var orders = new Order[]
             {
                 new Order() { TableNumber = 1, TotalPrice = 5 },
                 new Order() { TableNumber = 1, TotalPrice = 5 },
                 new Order() { TableNumber = 2, TotalPrice = 9 },
             };
-            var fakeKitchen = A.Fake<IKitchen>();
+            IKitchen fakeKitchen = A.Fake<IKitchen>();
             A.CallTo(() => fakeKitchen.GetAllOrders()).Returns(orders);
             var sut = new Restaurant(fakeKitchen);
-            var expected = 1;
+            int expected = 1;
             //Act
-            var actual = sut.GetTableNumberWithHighestTotal();
+            int actual = sut.GetTableNumberWithHighestTotal();
             //Assert
             actual.Should().Be(expected);
         }
@@ -32,18 +32,18 @@ namespace RestaurantApp.Test
         public void GettingTableNumberWithMostOrders_ReturnsExpectedResult()
         {
             //Arrange
-            var orders = new List<Order>()
+            var orders = new Order[]
             {
                 new Order() { TableNumber = 1, TotalPrice = 10 },
                 new Order() { TableNumber = 2, TotalPrice = 1 },
                 new Order() { TableNumber = 2, TotalPrice = 1 },
             };
-            var fakeKitchen = A.Fake<IKitchen>();
+            IKitchen fakeKitchen = A.Fake<IKitchen>();
             A.CallTo(() => fakeKitchen.GetAllOrders()).Returns(orders);
             var sut = new Restaurant(fakeKitchen);
-            var expected = 2;
+            int expected = 2;
             //Act
-            var actual = sut.GetTableNumberWithHighestOrderCount();
+            int actual = sut.GetTableNumberWithHighestOrderCount();
             //Assert
             actual.Should().Be(expected);
         }
@@ -52,18 +52,18 @@ namespace RestaurantApp.Test
         public void GettingAverageTotalPrice_ReturnsExpectedResult()
         {
             //Arrange
-            var orders = new List<Order>()
+            var orders = new Order[]
             {
                 new Order() { TableNumber = 1, TotalPrice = 10 },
                 new Order() { TableNumber = 2, TotalPrice = 15 },
                 new Order() { TableNumber = 2, TotalPrice = 20 },
             };
-            var fakeKitchen = A.Fake<IKitchen>();
+            IKitchen fakeKitchen = A.Fake<IKitchen>();
             A.CallTo(() => fakeKitchen.GetAllOrders()).Returns(orders);
             var sut = new Restaurant(fakeKitchen);
-            var expected = 15;
+            int expected = 15;
             //Act
-            var actual = sut.GetAverageOrderPrice();
+            decimal actual = sut.GetAverageOrderPrice();
             //Assert
             actual.Should().Be(expected);
         }

@@ -20,7 +20,7 @@ namespace StringMixerLibrary.Test
             var sut = new StringMixer();
 
             //Act
-            var actual = sut.Mix(input1, input2);
+            string actual = sut.Mix(input1, input2);
 
             //Assert
             actual.Should().Be(

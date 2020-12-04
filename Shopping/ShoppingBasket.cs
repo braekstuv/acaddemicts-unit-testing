@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -7,6 +8,9 @@ namespace Shopping
 {
     public class ShoppingBasket
     {
+        private const string CurrencyFormat = "0.00";
+        private static CultureInfo CurrencyCultureInfo = new CultureInfo("en-US");
+
         private readonly List<ArticleEntry> _innerArticles = new List<ArticleEntry>();
         private readonly ISoundModule _soundModule;
         private readonly IPriceCatalog _priceCatalog;
@@ -20,7 +24,7 @@ namespace Shopping
             _allowedWeight = allowedWeight;
         }
 
-        public ShoppingBasket(ISoundModule soundModule, IPriceCatalog priceCatalog, float allowedWeight, IEnumerable<ArticleEntry> articles)
+        public ShoppingBasket(ISoundModule soundModule, IPriceCatalog priceCatalog, float allowedWeight, ArticleEntry[] articles)
             : this(soundModule, priceCatalog, allowedWeight)
         {
             _innerArticles = articles.ToList();
@@ -28,7 +32,7 @@ namespace Shopping
 
         public void AddArticle(int id, float weight)
         {
-            var article = _priceCatalog.GetArticle(id);
+            Article article = _priceCatalog.GetArticle(id);
 
             _innerArticles.Add(new ArticleEntry()
             {
@@ -49,13 +53,13 @@ namespace Shopping
                     return "Allowed weight exceeded, please remove one or more articles.";
 
                 var result = new StringBuilder();
-                var sumTotalPrice = 0m;
+                decimal sumTotalPrice = 0m;
                 foreach (var ae in _innerArticles)
                 {
                     sumTotalPrice += ae.TotalPrice;
-                    result.Append($"{ae.Count} x {ae.Name}, {ae.TotalPrice.ToString("0.00")} Euro; ");
+                    result.Append($"{ae.Count} x {ae.Name}, {ae.TotalPrice.ToString(CurrencyFormat, CurrencyCultureInfo)} Euro; ");
                 }
-                result.Append($"Total Amount: {sumTotalPrice} Euro");
+                result.Append($"Total Amount: {sumTotalPrice.ToString(CurrencyFormat, CurrencyCultureInfo)} Euro");
 
                 return result.ToString();
             }
@@ -63,10 +67,10 @@ namespace Shopping
 
         public void UpdatePrices()
         {
-            var shouldBeep = false;
+            bool shouldBeep = false;
             foreach (var ae in _innerArticles)
             {
-                var article = _priceCatalog.GetArticle(ae.ArticleId);
+                Article article = _priceCatalog.GetArticle(ae.ArticleId);
                 if (article.Price < ae.UnitPrice)
                 {
                     ae.UnitPrice = article.Price;

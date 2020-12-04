@@ -4,6 +4,6 @@ namespace RestaurantApp
 {
     public interface IKitchen
     {
-        ICollection<Order> GetAllOrders();
+        Order[] GetAllOrders();
     }
 }

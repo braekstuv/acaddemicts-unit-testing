@@ -10,12 +10,12 @@ namespace BasicCalculator.Test._1._1._2._FluentAssertions
         {
             //Arrange
             var sut = new Calculator();
-            var x = 1;
-            var y = 1;
-            var expected = 1;
+            int x = 1;
+            int y = 1;
+            int expected = 1;
 
             //Act
-            var actual = sut.Multiply(x, y);
+            int actual = sut.Multiply(x, y);
 
             //Assert
             actual.Should().Be(expected, $"1 * 1 = 1");
@@ -26,12 +26,12 @@ namespace BasicCalculator.Test._1._1._2._FluentAssertions
         {
             //Arrange
             var sut = new Calculator();
-            var x = -5;
-            var y = 10;
-            var expected = -50;
+            int x = -5;
+            int y = 10;
+            int expected = -50;
 
             //Act
-            var actual = sut.Multiply(x, y);
+            int actual = sut.Multiply(x, y);
 
             //Assert
             actual.Should().Be(expected, $"-5 * 10 = -50");
@@ -42,12 +42,12 @@ namespace BasicCalculator.Test._1._1._2._FluentAssertions
         {
             //Arrange
             var sut = new Calculator();
-            var x = 1;
-            var y = 0;
-            var expected = 0;
+            int x = 1;
+            int y = 0;
+            int expected = 0;
 
             //Act
-            var actual = sut.Multiply(x, y);
+            int actual = sut.Multiply(x, y);
 
             //Assert
             actual.Should().Be(expected, $"1 * 0 = 0");

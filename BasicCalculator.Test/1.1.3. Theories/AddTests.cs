@@ -16,7 +16,7 @@ namespace BasicCalculator.Test._1._1._3._Theories
             var sut = new Calculator();
 
             //Act
-            var actual = sut.Add(x, y);
+            int actual = sut.Add(x, y);
 
             //Assert
             actual.Should().Be(expected, because);
@@ -27,8 +27,8 @@ namespace BasicCalculator.Test._1._1._3._Theories
         {
             //Arrange
             var sut = new Calculator();
-            var x = int.MaxValue;
-            var y = 1;
+            int x = int.MaxValue;
+            int y = 1;
 
             //Act
             Action act = () => sut.Add(x, y);

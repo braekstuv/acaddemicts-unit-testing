@@ -14,8 +14,8 @@ namespace Shopping.Test
         public void GivenEmptyBasket_WhenItemIsAdded_ThenDisplayShowsExpectedResult()
         {
             //Arrange
-            var fakeSoundModule = A.Fake<ISoundModule>();
-            var fakePriceCatalog = A.Fake<IPriceCatalog>();
+            ISoundModule fakeSoundModule = A.Fake<ISoundModule>();
+            IPriceCatalog fakePriceCatalog = A.Fake<IPriceCatalog>();
 
             A.CallTo(() => fakePriceCatalog.GetArticle(1)).Returns(new Article()
             {
@@ -23,7 +23,8 @@ namespace Shopping.Test
                 Name = "12 Eggs",
                 Price = 2.69m
             });
-            var expected = "1 x 12 Eggs, 2.69 Euro; Total Amount: 2.69 Euro";
+
+            string expected = "1 x 12 Eggs, 2.69 Euro; Total Amount: 2.69 Euro";
             var sut = new ShoppingBasket(fakeSoundModule, fakePriceCatalog, 0);
 
             //Act
@@ -37,9 +38,9 @@ namespace Shopping.Test
         public void GivenShoppingBasket_WhenPriceUpdatedLower_ThenDisplayShowsExpectedResult()
         {
             //Arrange
-            var fakeSoundModule = A.Fake<ISoundModule>();
-            var fakePriceCatalog = A.Fake<IPriceCatalog>();
-            var catalog = new List<Article>()
+            ISoundModule fakeSoundModule = A.Fake<ISoundModule>();
+            IPriceCatalog fakePriceCatalog = A.Fake<IPriceCatalog>();
+            var catalog = new Article[]
             {
                 new Article()
                 {
@@ -58,8 +59,8 @@ namespace Shopping.Test
             A.CallTo(() => fakePriceCatalog.GetArticle(A<int>._))
                 .ReturnsLazily((int id) => catalog.Single(a => a.Id == id));
 
-            var expected = "2 x 12 Eggs, 4.40 Euro; 5 x 1l Water, 7.50 Euro; Total Amount: 11.90 Euro";
-            var sut = new ShoppingBasket(fakeSoundModule, fakePriceCatalog, 0, new List<ArticleEntry>()
+            string expected = $"2 x 12 Eggs, 4.40 Euro; 5 x 1l Water, 7.50 Euro; Total Amount: 11.90 Euro";
+            var sut = new ShoppingBasket(fakeSoundModule, fakePriceCatalog, 0, new ArticleEntry[]
             {
                 new ArticleEntry()
                 {
@@ -89,9 +90,9 @@ namespace Shopping.Test
         public void GivenShoppingBasket_WhenPriceUpdatedHigher_ThenDisplayShowsExpectedResult()
         {
             //Arrange
-            var fakeSoundModule = A.Fake<ISoundModule>();
-            var fakePriceCatalog = A.Fake<IPriceCatalog>();
-            var catalog = new List<Article>()
+            ISoundModule fakeSoundModule = A.Fake<ISoundModule>();
+            IPriceCatalog fakePriceCatalog = A.Fake<IPriceCatalog>();
+            var catalog = new Article[]
             {
                 new Article()
                 {
@@ -110,8 +111,8 @@ namespace Shopping.Test
             A.CallTo(() => fakePriceCatalog.GetArticle(A<int>._))
                 .ReturnsLazily((int id) => catalog.Single(a => a.Id == id));
 
-            var expected = "2 x 12 Eggs, 5.38 Euro; 5 x 1l Water, 7.50 Euro; Total Amount: 12.88 Euro";
-            var sut = new ShoppingBasket(fakeSoundModule, fakePriceCatalog, 0, new List<ArticleEntry>()
+            string expected = "2 x 12 Eggs, 5.38 Euro; 5 x 1l Water, 7.50 Euro; Total Amount: 12.88 Euro";
+            var sut = new ShoppingBasket(fakeSoundModule, fakePriceCatalog, 0, new ArticleEntry[]
             {
                 new ArticleEntry()
                 {
@@ -141,11 +142,11 @@ namespace Shopping.Test
         public void GivenShoppingBasket_WhenWeightExceeded_ThenDisplayShowsExpectedResult()
         {
             //Arrange
-            var fakeSoundModule = A.Fake<ISoundModule>();
-            var fakePriceCatalog = A.Fake<IPriceCatalog>();
+            ISoundModule fakeSoundModule = A.Fake<ISoundModule>();
+            IPriceCatalog fakePriceCatalog = A.Fake<IPriceCatalog>();
             A.CallTo(() => fakePriceCatalog.GetArticle(A<int>._)).Returns(new Article());
             var sut = new ShoppingBasket(fakeSoundModule, fakePriceCatalog, 0.75f);
-            var expected = "Allowed weight exceeded, please remove one or more articles.";
+            string expected = "Allowed weight exceeded, please remove one or more articles.";
 
             //Act
             sut.AddArticle(0, 1);

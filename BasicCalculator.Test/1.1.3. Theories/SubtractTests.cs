@@ -15,7 +15,7 @@ namespace BasicCalculator.Test._1._1._3._Theories
             var sut = new Calculator();
 
             //Act
-            var actual = sut.Subtract(x, y);
+            int actual = sut.Subtract(x, y);
 
             //Assert
             actual.Should().Be(expected, because);

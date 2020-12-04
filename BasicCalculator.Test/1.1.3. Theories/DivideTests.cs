@@ -15,7 +15,7 @@ namespace BasicCalculator.Test._1._1._3._Theories
             var sut = new Calculator();
 
             //Act
-            var actual = sut.Divide(x, y);
+            double actual = sut.Divide(x, y);
 
             //Assert
             actual.Should().Be(expected, because);
@@ -26,9 +26,9 @@ namespace BasicCalculator.Test._1._1._3._Theories
         {
             //Arrange
             var sut = new Calculator();
-            var x = 1;
-            var y = 0;
-            var expectedMessage = "Cannot divide by 0.";
+            int x = 1;
+            int y = 0;
+            string expectedMessage = "Cannot divide by 0.";
             Action act = () => sut.Divide(x, y);
 
             //Act && Assert

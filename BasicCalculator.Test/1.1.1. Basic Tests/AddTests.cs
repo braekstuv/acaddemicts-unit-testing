@@ -9,12 +9,12 @@ namespace BasicCalculator.Test._1._1._1._Basic_Tests
         {
             //Arrange
             var sut = new Calculator(); // sut stands for System Under Test
-            var x = 1;
-            var y = 1;
-            var expected = 2; //Always use a specific expected result (i.e. never calculate this)
+            int x = 1;
+            int y = 1;
+            int expected = 2; //Always use a specific expected result (i.e. never calculate this)
 
             //Act
-            var actual = sut.Add(x, y);
+            int actual = sut.Add(x, y);
 
             //Assert
             Assert.Equal(expected, actual);
@@ -25,12 +25,12 @@ namespace BasicCalculator.Test._1._1._1._Basic_Tests
         {
             //Arrange
             var sut = new Calculator();
-            var x = -5;
-            var y = 10;
-            var expected = 5;
+            int x = -5;
+            int y = 10;
+            int expected = 5;
 
             //Act
-            var actual = sut.Add(x, y);
+            int actual = sut.Add(x, y);
 
             //Assert
             Assert.Equal(expected, actual);
@@ -41,11 +41,11 @@ namespace BasicCalculator.Test._1._1._1._Basic_Tests
         {
             //Arrange
             var sut = new Calculator();
-            var x = 1;
-            var y = 0;
-            var expected = 1;
+            int x = 1;
+            int y = 0;
+            int expected = 1;
             //Act
-            var actual = sut.Add(x, y);
+            int actual = sut.Add(x, y);
 
             //Assert
             Assert.Equal(expected, actual);

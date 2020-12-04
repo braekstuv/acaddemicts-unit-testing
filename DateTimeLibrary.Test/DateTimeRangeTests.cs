@@ -32,7 +32,7 @@ namespace DateTimeLibrary.Test
             var sut = new DateTimeRange(start, end);
 
             //Act
-            var actual = sut.Includes(date);
+            bool actual = sut.Includes(date);
 
             //Assert
             actual.Should().Be(expectedResult);
@@ -40,7 +40,7 @@ namespace DateTimeLibrary.Test
 
         public static IEnumerable<object[]> DateTimeTestCases()
         {
-            return new List<object[]>()
+            return new object[][]
             {
                 new object[] { new DateTime(2000, 1, 1), new DateTime(2000, 1, 3), new DateTime(2000, 1, 1), true },
                 new object[] { new DateTime(2000, 1, 1), new DateTime(2000, 1, 3), new DateTime(2000, 1, 2), true },

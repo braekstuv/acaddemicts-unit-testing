@@ -34,7 +34,7 @@ namespace CalculatorApp.Domain
             }
             else
             {
-                var digit = int.Parse(input.ToString());
+                int digit = int.Parse(input.ToString());
                 if (_canSetNewOperand)
                 {
                     Display = digit;

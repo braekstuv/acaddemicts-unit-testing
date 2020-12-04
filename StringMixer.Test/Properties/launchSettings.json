@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "StringMixerLibrary.Test": {
-      "commandName": "Project",
-      "commandLineArgs": "/p:CollectCoverage=true"
-    }
-  }
-}
